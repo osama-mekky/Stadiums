@@ -29,10 +29,10 @@ def Register(request):
             conf_password = request.POST['conf_password']
 
             if User.objects.filter(username=username).exists():
-                messages.error(request,'Username Is Taken')
+                messages.error(request,'اسم المستخدم موجود مسبقا')
             else:
                 if User.objects.filter(email=email).exists():
-                    messages.error(request,'This Email is Already taken')
+                    messages.error(request,'البريد الألكتروني موجود مسبقا')
                 else :
                     patt= "^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"
                     patt_number = r"\d{11}"
@@ -46,18 +46,18 @@ def Register(request):
                                     user.save()
                                     userprofile = UserProfile(user=user,age=age,phone_number=phone_number)
                                     userprofile.save()
-                                    messages.success(request,'account Success')
-                                    return redirect('login')
+                                    messages.success(request,'تم انشاء الحساب بنجاح')
+                                    
                                     
                                 else:
-                                    messages.error(request,"Password Not Match")
+                                    messages.error(request,"كلمة السر غير متطابقة")
 
                             else :
-                                messages.error(request,"Inavailed Email")
+                                messages.error(request,"خطأ في البريد الألكتروني")
                         else :
-                            messages.error(request,"Inavailed Number")
+                            messages.error(request,"خطأ في رقم الهاتف")
                     else : 
-                        messages.error(request,"Wrong Age")
+                        messages.error(request,"خطأ في العمر")
 
 
 
@@ -98,7 +98,10 @@ def profile(request):
     openingHours = OpeningHours.objects.all()
     manager = Manager.objects.all()
     time = timezone.now()
-    #limted_time =datetime.timedelta(minutes=2)
+    today = datetime.datetime.today().date()
+          
+
+          
     
     if request.method=='POST' and 'btnsave' in request.POST:
         if request.user is not None and request.user.id != None :
@@ -129,6 +132,8 @@ def profile(request):
                 'openingHours':openingHours,
                 'time':time,
                 'manager':manager,
+                'today':today,
+                
                 
                 
 

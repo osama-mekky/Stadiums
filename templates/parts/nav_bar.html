@@ -1,62 +1,74 @@
 {% load static %}
 
-<div id="fh5co-header">
-    <header id="fh5co-header-section">
-        <div class="container">
-            <div class="nav-header">
-                <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-                <h1 id="fh5co-logo"><a href="index.html">Listing</a></h1>
-                <!-- START #fh5co-menu-wrap -->
-                <nav id="fh5co-menu-wrap" role="navigation">
-                    <ul class="sf-menu" id="fh5co-primary-menu">
-                        {% if request.user.is_authenticated %}
-                            <li style="left: -200px;"><a class="fh5co-sub-ddown" href="#"><strong style="font-size: 20px;color:rgb(198, 221, 198);">Hi {{request.user.username}}</strong></a>
-                                <ul class="fh5co-sub-menu">
-                                    <li><a href="{% url 'logout' %}">Logout</a></li>
-                                </ul>    
-                            
+<!-- header -->
+<div class="top-header-area" id="sticker">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 text-center">
+                <div class="main-menu-wrap">
+                    <!-- logo -->
+                    <div class="site-logo">
+                        <a href="{% url 'index'%}">
+                            <img src="{% static 'assets/img/logo.png' %}" alt="">
+                        </a>
+                    </div>
+                    <!-- logo -->
+
+                    <!-- menu start -->
+                    <nav class="main-menu">
+                        <ul>
+                            <li class="current-list-item"><a href="{% url 'index'%}">Home</a>
                             </li>
-                        {% endif %}    
-                        <li class="active">
-                            <a href="{% url 'index'%}">Home</a>
-                        </li>
-                        {% if request.user.is_authenticated %}
-                        <li><a href="{%url 'profile' %}">MyProfile</a></li>
-                        {% else %}
-                        <li>
-                            <a href="#" class="fh5co-sub-ddown">join Us</a>
-                            <ul class="fh5co-sub-menu">
-                                <li><a href="{% url 'login' %}">Login</a></li>
-                                <li><a href="{% url 'register' %}">Register</a></li>
-                            </ul>
-                        </li>
-                        {% endif %}
-                        <li>
-                            <a href="{% url 'pitches' %}" class="fh5co-sub-ddown">Pitches</a>
-                             <ul class="fh5co-sub-menu">
-                                 <li><a href="left-sidebar.html">Web Development</a></li>
-                                 <li><a href="right-sidebar.html">Branding &amp; Identity</a></li>
-                                <li>
-                                    <a href="#" class="fh5co-sub-ddown">Free HTML5</a>
-                                    <ul class="fh5co-sub-menu">
-                                        <li><a href="http://freehtml5.co/preview/?item=build-free-html5-bootstrap-template" target="_blank">Build</a></li>
-                                        <li><a href="http://freehtml5.co/preview/?item=work-free-html5-template-bootstrap" target="_blank">Work</a></li>
-                                        <li><a href="http://freehtml5.co/preview/?item=light-free-html5-template-bootstrap" target="_blank">Light</a></li>
-                                        <li><a href="http://freehtml5.co/preview/?item=relic-free-html5-template-using-bootstrap" target="_blank">Relic</a></li>
-                                        <li><a href="http://freehtml5.co/preview/?item=display-free-html5-template-using-bootstrap" target="_blank">Display</a></li>
-                                        <li><a href="http://freehtml5.co/preview/?item=sprint-free-html5-template-bootstrap" target="_blank">Sprint</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">UI Animation</a></li>
-                                <li><a href="#">Copywriting</a></li>
-                                <li><a href="#">Photography</a></li> 
-                            </ul>
-                        </li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>
+                            {% if request.user.is_authenticated %}
+                            <li><a href="{% url 'profile' %}">MyProfile</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'pitches' %}">Pitches</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <!-- <li><a href="{% url 'register' %}">Register</a></li> -->
+                            <li>
+                                <div class="header-icons">
+                                        
+                                    <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                                    
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                    <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                    {% if request.user.is_authenticated %}
+                    <a  href="{% url 'logout' %}"><i class="fas fa-sign-out-alt login-icon"></i></a>
+                    {% else %}
+                    <a  href="{% url 'login' %}"><i class="fas fa-user login-icon"></i></a>
+                    {% endif %}
+                    
+                    <div class="mobile-menu"></div>
+                    <!-- menu end -->
+                </div>
             </div>
         </div>
-    </header>
-    
+    </div>
 </div>
+<!-- end header -->
+
+
+<!-- search area -->
+<div class="search-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <span class="close-btn"><i class="fas fa-window-close"></i></span>
+                <div class="search-bar">
+                    <div class="search-bar-tablecell">
+                        <h3>Search For:</h3>
+                        <form method="GET" action="{% url 'pitches' %}">
+                        <input type="text" name="q" placeholder="Keywords">
+                        <button type="submit">Search <i class="fas fa-search"></i></button>
+                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end search area -->
