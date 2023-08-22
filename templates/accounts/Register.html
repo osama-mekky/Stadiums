@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Register{% endblock %}
+{% block content %}
+
+<div class="fh5co-overlay"></div>
+    <div class="fh5co-cover text-center" data-stellar-background-ratio="0.5" style="background-image: url(../static/images/logo.jpg);">
+        <div class="desc animate-box">
+        
+          
+          <form method="POST">
+              {% csrf_token %}
+              <div style="position: absolute;margin-left:700px;bottom:700px;border-style:dashed;border-width: 5px;border-radius: 5px; padding:5px">
+                {% if messages %}
+                  {% for mess in messages %}
+                  
+                  {% if 'danger' == mess.tags%}
+                  <h3 style="color: red;" >Erorr : {{mess}}</h3>
+                  {% else %}
+                  <h3 style="color: rgb(4, 37, 4);" > Scuesss: {{mess}}</h3>
+                  {% endif %}
+
+
+                  {% endfor %}
+                {% endif %}  
+              </div>
+
+              
+                <div style="margin-left:200px">
+                
+                <div class="row">
+                  <div class="col-md-5 mb-4">
+  
+                    <div class="form-outline">
+                    <label class="form-label" for="firstName">First Name</label>  
+                    <input style="text-align: center; font-size:25px" type="text" name="fName" class="form-control form-control-lg" required />
+                    </div>
+                    <br>
+  
+                  </div>
+                  <div class="col-md-5 mb-4">
+  
+                    <div class="form-outline">
+                    <label class="form-label" for="lastName">Last Name</label>  
+                    <input style="text-align: center; font-size:25px" type="text" name="lName" class="form-control form-control-lg" required />
+                    </div>
+                    <br>
+                </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5 mb-4">
+    
+                      <div class="form-outline">
+                      <label class="form-label" for="firstName">Age</label>  
+                      <input style="text-align: center; font-size:25px" type="text" name="age" class="form-control form-control-lg" required />
+                      </div>
+                      <br>
+    
+                    </div>
+                    <div class="col-md-5 mb-4">
+    
+                      <div class="form-outline">
+                      <label class="form-label" for="lastName">PhoneNumber</label>  
+                      <input style="text-align: center; font-size:25px" type="text" name="phone_number" class="form-control form-control-lg" required />
+                      </div>
+                      <br>
+                  </div>
+                  </div>
+
+
+                <div class="row">
+                    <div class="col-md-5 mb-4">
+    
+                      <div class="form-outline">
+                      <label class="form-label" for="firstName">Username</label>  
+                      <input style="text-align: center; font-size:25px" type="text" name="username" class="form-control form-control-lg" required />
+                      </div>
+                      <br>
+    
+                    </div>
+                    <div class="col-md-5 mb-4">
+    
+                      <div class="form-outline">
+                      <label class="form-label" for="lastName">Email</label>  
+                      <input style="text-align: center; font-size:25px" type="email" name="email" class="form-control form-control-lg" required />
+                      </div>
+                      <br>
+                  </div>
+                  </div>
+
+                
+                <div class="row">
+                    <div class="col-md-5 mb-4">
+    
+                      <div class="form-outline">
+                      <label class="form-label" for="password">Password</label>  
+                      <input style="text-align: center; font-size:25px" type="password" name="password" class="form-control form-control-lg" required />
+                      </div>
+                      <br>
+    
+                    </div>
+                    <div class="col-md-5 mb-4">
+    
+                      <div class="form-outline">
+                      <label class="form-label" for="password">Confirm Password</label>  
+                      <input style="text-align: center; font-size:25px" type="password" name="conf_password" class="form-control form-control-lg" required />
+                      </div>
+                      <br>
+                  </div>
+                  </div>
+            </div>
+            <div class="mt-4 pt-2" style="margin: 10px;">
+              <button type="submit" class="btn btn-primary btn-lg">Register</button>
+              </div>
+              </form>
+
+
+{% endblock %}
