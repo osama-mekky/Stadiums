@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hello.apps.HelloConfig',
     'accounts.apps.AccountsConfig',
+    'pitches.apps.PitchesConfig',
+    'location_field.apps.DefaultConfig',
 ]
 
 MIDDLEWARE = [

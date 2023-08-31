@@ -90,5 +90,33 @@ def logout(request):
 
 @login_required(login_url='login')
 def profile(request):
-    return render(request,'accounts/profile.html')
+    if request.method=='POST' and 'btnsave' in request.POST:
+        if request.user is not None and request.user.id != None :
+            userprofile = UserProfile.objects.get(user = request.user)
+            if request.POST['fname'] and request.POST['lname'] and request.POST['age'] and request.POST['phone_number'] and request.POST['username'] and request.POST['email'] and request.POST['password'] :
+                request.user.first_name = request.POST['fname']
+                request.user.last_name = request.POST['lname']
+                userprofile.age = request.POST['age']
+                userprofile.phone_number = request.POST['phone_number']
+                if not request.POST['password'].startswith('pbkdf2_sha256$'):
+                    request.user.set_password(request.POST['password'])
+                request.user.save()
+                userprofile.save()
+                auth.login(request,request.user)    
+        return redirect('profile')
+    else :
+        if request.user is not None :
+            userprofile = UserProfile.objects.get(user=request.user)
+
+            context ={
+                'fname':request.user.first_name,
+                'lname':request.user.last_name,
+                'age':userprofile.age,
+                'phone':userprofile.phone_number,
+                'email':request.user.email,
+                'user':request.user.username,
+                'pass':request.user.password,
+
+            }
+            return render(request,'accounts/profile.html',context)
         

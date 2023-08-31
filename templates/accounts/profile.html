@@ -6,8 +6,39 @@
   
      
     <div class="fh5co-hero">
-        <div class="fh5co-overlay"></div>
+        <div class="fh5co-"></div>
         <div class="fh5co-cover text-center" data-stellar-background-ratio="0.5" style="background-image: url(../static/images/logo.jpg);">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="profile_info">
+                <h1 style="text-align: center; color:green">الصفحة الشخصية </h1>
+                    <label for="inputFirstName">First Name</label>
+                    <input type="text" value="{{fname}}" class="form-control" name="fname" id="inputFirstName" required>
+                    <label for="inputLastName">Last Name</label>
+                    <input type="text" value="{{lname}}" class="form-control" name="lname" id="inputLastName" required>
+                    <label class="form-label" for="firstName">Age</label>  
+                    <input type="text" value="{{age}}" name="age" class="form-control form-control-lg" required />
+                    <label class="form-label" for="lastName">PhoneNumber</label>  
+                    <input type="text" value="{{phone}}" name="phone_number" class="form-control form-control-lg" required />
+                    <label class="form-label" for="firstName">Username</label>  
+                    <input type="text" value="{{user}}" name="username" readonly class="form-control form-control-lg" required />
+                    <label class="form-label" for="lastName">Email</label>  
+                    <input type="email"value="{{email}}" name="email" readonly class="form-control form-control-lg" required />
+                    <label class="form-label" for="password">Password</label>  
+                    <input type="password" value="{{pass}}" name="password" class="form-control form-control-lg" required />
+
+                    <button style="margin: 10px;" type="submit" name="btnsave" class="btn btn-warning">Save Changes</button>
+
+
+
+            </div>
+
+            <div class="profile_booking">
+                <h1 style="text-align: center; color:green">حجوزاتي</h1>
+                
+
+            </div>
+        </form>    
             
         </div>
 

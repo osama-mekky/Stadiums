@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Pitches{% endblock %}
+{% block content %}
+
+
+     
+    
+    <div class="fh5co-hero">
+        <div class="fh5co-overlay"></div>
+        <div class="fh5co-cover text-center" data-stellar-background-ratio="0.5" style="background-image: url(../static/images/logo.jpg);background-attachment:fixed;">
+            
+            
+
+                <div class="fh5co-listing" style="margin-top: 95px;">
+                    <div class="container">
+                        <div class="row">
+                            {% for pit in pitche %}
+                            <div class="col-md-3 col-sm-3 fh5co-item-wrap">
+                                <a class="fh5co-listing-item" href="{% url 'pitche' pit.id %}" >
+                                    <img style="width: 280px;" src="{{pit.photo.url}}" class="img-responsive">
+                                    <div class="fh5co-listing-copy">
+                                        <h2>{{pit.Name}}</h2>
+                                        <span class="icon">
+                                            <i class="icon-chevron-right"></i>
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endfor %}
+     
+                        </div>
+                    </div>
+                </div>
+
+                
+            
+
+            </div>
+        </div>
+
+    </div>
+    
+
+    <br>
+    <br>
+    <br>
+    <br>
+    
+<!-- END fh5co-page -->
+
+
+{% endblock %}
