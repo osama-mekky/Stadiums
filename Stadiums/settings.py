@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'hello.apps.HelloConfig',
     'accounts.apps.AccountsConfig',
     'pitches.apps.PitchesConfig',
-    'location_field.apps.DefaultConfig',
+    # 'location_field.apps.DefaultConfig',
 ]
 
 MIDDLEWARE = [
