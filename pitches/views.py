@@ -16,4 +16,3 @@ def pitche(request,id):
         'pit':get_object_or_404(Pitche,id=id)
     }
     return render(request,'pitches/pitche.html',context)
-
