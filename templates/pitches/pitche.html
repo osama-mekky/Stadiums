@@ -11,10 +11,11 @@
        
     </div>
     <form action="" method="POST">
+        {% csrf_token %}
         {% if request.user.is_authenticated  %}
         <div class="info">
-            <h3>المنطقة:{{pit.city}}</h3>
-            <h3>سعر الساعة :{{pit.price}}</h3>
+            
+            {{form.as_p}}
             <button  type="submit" class="btn btn-primary">حجز</button>
             {% else %}
             <button class="btn btn-primary" type="button"><a href="{% url 'login' %}">Login</a></button>
@@ -34,11 +35,14 @@
                             <img src="{{pit.photo.url}}" class="img-responsive">
                             <div class="fh5co-listing-copy">
                                 
+                                
                             
                             </div>
                         </a>
                         <br>
                         <br>
+                        <h3>المنطقة:{{pit.city}}</h3>
+                        <h3>سعر الساعة :{{pit.price}}</h3>
                         <button type="submit" class="btn btn-warning"><a  href="{{pit.location}}"; target="_blank";>Location</a></button>
                     </div>
 
