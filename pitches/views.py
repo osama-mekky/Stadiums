@@ -5,7 +5,7 @@ from .models import *
 from django.shortcuts import get_object_or_404
 from .forms import *
 from django.utils import timezone
-
+from django.contrib import messages
 
 def pitches(request):
     context ={
@@ -37,7 +37,13 @@ def pitche_page(request,id):
 
 
 
-
+def delateBooking(request,id):
+     booking = OpeningHours.objects.get(id=id)
+     if booking.user.id == request.user.id:
+        booking.delete()
+    #  if request.method == 'POST':
+    #     booking.delete()
+     return redirect('profile')
 
 
 

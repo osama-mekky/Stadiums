@@ -30,19 +30,77 @@
                     <button style="margin: 10px;" type="submit" name="btnsave" class="btn btn-warning">Save Changes</button>
 
 
-
+          </form>  
             </div>
+          </div>
+          
 
             <div class="profile_booking">
                 <h1 style="text-align: center; color:green">حجوزاتي</h1>
+
+                <div>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">day</th>
+                            <th scope="col">Pitche</th>
+                            <th scope="col">From_Hour</th>
+                            <th scope="col">To_Hour</th>
+                            <th scope="col">Timing</th>
+                            <th scope="col">Period</th>
+                            <th scope="col">Confirm</th>
+                            <th scope="col">id</th>
+                          </tr>
+                        </thead>
+                        {% for oph in openingHours  %}
+                        {% if request.user == oph.user %}
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>{{oph.user}}</td>
+                            <td>{{oph.made_on}}</td>
+                            <td>{{oph.pitche}}</td>
+                            <td>{{oph.from_hour|date:'h:i A'}}</td>
+                            <td>{{oph.to_hour|date:'h:i A' }}</td>
+                            <td>{{oph.timing}}</td>
+                            <td>{{oph.period}}</td>
+                            <td><a  class="btn btn-danger" href="{% url 'delate-booking' oph.id %}">Delate</a></td>
+                            <td>{{oph.id}}</td>
+                          </tr>
+                        </tbody>
+                        {% endif %}
+                        {% endfor %}
+                      </table>
                 
 
-            </div>
-        </form>    
+            </div>  
             
         </div>
 
+
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Select Quantity</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="inputQty">Quantity:</label>
+            <input type="text" class="form-control" name="qty" value="1" id="inputQty" placeholder="" required>
+            <input type="hidden" name="pro_id" value="{{pro.id}}">
+            <input type="hidden" name="price" value="{{pro.price}}">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnclose">Close</button>
+        <button onclick="addtocart()" class="btn btn-warning" >Confirm</button>
+      </div>
     </div>
-
-
+  </div>
+</div>
 {% endblock %}

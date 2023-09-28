@@ -5,5 +5,6 @@ urlpatterns = [
     
     path('',views.pitches,name='pitches'),
     path('<int:id>',views.pitche_page,name='pitche'),
+    path('delate-booking/<int:id>',views.delateBooking,name='delate-booking'),
 
 ]

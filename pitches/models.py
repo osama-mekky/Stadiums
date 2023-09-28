@@ -56,6 +56,8 @@ class OpeningHours(models.Model):
 
     def __str__(self):
         return f"{self.pitche}-{self.from_hour} to {self.to_hour}"
+    class Meta :
+        ordering =['-made_on']
   
     def clean(self):
         if self.from_hour == self.to_hour:
@@ -66,7 +68,7 @@ class OpeningHours(models.Model):
             OpeningHours.objects.exclude(pk=self.pk)
             .filter(
                 made_on=self.made_on,
-                period=self.period,
+                #period=self.period,
                 pitche_id=self.pitche_id,
                 to_hour__gt=self.from_hour,
                 from_hour__lt=self.to_hour,

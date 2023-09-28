@@ -5,7 +5,7 @@ import re
 from .models import *
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-
+from pitches.models import OpeningHours
 # Create your views here.
 
 def Register(request):
@@ -90,6 +90,7 @@ def logout(request):
 
 @login_required(login_url='login')
 def profile(request):
+    openingHours = OpeningHours.objects.all()
     if request.method=='POST' and 'btnsave' in request.POST:
         if request.user is not None and request.user.id != None :
             userprofile = UserProfile.objects.get(user = request.user)
@@ -116,6 +117,7 @@ def profile(request):
                 'email':request.user.email,
                 'user':request.user.username,
                 'pass':request.user.password,
+                'openingHours':openingHours,
 
             }
             return render(request,'accounts/profile.html',context)
