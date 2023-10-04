@@ -47,27 +47,27 @@ period =[
 class OpeningHours(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     pitche = models.ForeignKey(Pitche,on_delete=models.DO_NOTHING)
-    made_on = models.DateField()
-    period = models.CharField(max_length=50,choices=period)
-    from_hour = models.TimeField()
-    to_hour = models.TimeField()
+    from_hour = models.DateTimeField(default=datetime.datetime.now())
+    to_hour = models.DateTimeField(default=datetime.datetime.now())
     timing = models.CharField(max_length=50,choices=timing)
 
 
     def __str__(self):
-        return f"{self.pitche}-{self.from_hour} to {self.to_hour}"
+        return f"{self.pitche}-{self.from_hour.time()} to {self.to_hour.time()}"
     class Meta :
-        ordering =['-made_on']
+        ordering =['-from_hour']
   
     def clean(self):
         if self.from_hour == self.to_hour:
             raise ValidationError('Wrong Time')
-        if self.made_on < datetime.date.today():
-            raise ValidationError('InVaild Date')
+           
+
+      
+                    
         if (
             OpeningHours.objects.exclude(pk=self.pk)
             .filter(
-                made_on=self.made_on,
+                #made_on=self.made_on,
                 #period=self.period,
                 pitche_id=self.pitche_id,
                 to_hour__gt=self.from_hour,
@@ -83,3 +83,9 @@ class OpeningHours(models.Model):
 
 
 
+ # if OpeningHours.objects.filter(to_hour = self.to_hour).exists():
+        #     raise ValidationError("Wrong")
+       
+        # if self.to_hour >datetime.time(0,00) and (self.from_hour == datetime.time(23,00) or self.from_hour==datetime.time(22,00)):
+        #         if OpeningHours.objects.exclude(pk=self.pk).filter(made_on=self.made_on,pitche_id=self.pitche_id,to_hour =self.to_hour,from_hour=self.from_hour).exists():
+        #                 raise ValidationError("Can Not")

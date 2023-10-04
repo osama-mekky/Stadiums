@@ -10,11 +10,11 @@ class RestaurantForm(forms.ModelForm):
     class Meta:
         model = OpeningHours
 
-        fields = ('made_on','period', 'from_hour', 'to_hour','timing',)
+        fields = ('from_hour', 'to_hour','timing',)
         widgets = {
-            'made_on': DateInput(attrs={'class':'form-control'}),
-            'period':forms.Select(attrs={'class':'form-control'}),
-            'from_hour':forms.TextInput(attrs={'class':'form-control'}),
-            'to_hour':forms.TextInput(attrs={'class':'form-control'}),
+            #'made_on': DateInput(attrs={'class':'form-control'}),
+            #'period':forms.Select(attrs={'class':'form-control'}),
+            'from_hour':forms.DateTimeInput(format=('%Y-%m-%dT%H:%M'),attrs={'type':'datetime-local','class':'form-control'}),
+            'to_hour':forms.DateTimeInput(format=('%Y-%m-%dT%H:%M'),attrs={'type':'datetime-local','class':'form-control'}),
             'timing':forms.Select(attrs={'class':'form-control'}),
         }
