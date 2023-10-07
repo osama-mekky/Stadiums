@@ -7,6 +7,12 @@ from django.contrib import messages
 import datetime 
 # Create your models here.
 
+class City(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self) -> str:
+        return self.name
+
 class Manager(models.Model):
     name = models.CharField(max_length=50)
     phone = models.CharField(max_length=11)
@@ -18,7 +24,8 @@ class Manager(models.Model):
 
 class Pitche(models.Model):
     Name = models.CharField(max_length=50)
-    city =models.CharField(max_length=50)
+    city = models.ForeignKey(City,on_delete=models.DO_NOTHING)
+    address = models.CharField(max_length=200)
     photo = models.ImageField(upload_to='photos')
     price = models.DecimalField(max_digits=5,decimal_places=2)
     location = models.CharField(max_length=500)

@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Pitche)
 admin.site.register(Manager)
 admin.site.register(OpeningHours)
+admin.site.register(City)

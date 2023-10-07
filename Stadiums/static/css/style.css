@@ -37,9 +37,10 @@ body.fh5co-offcanvas {
   text-align: center;
   border-radius: 20px;
 }
+
 .info{
   position: absolute;
-  left: 900px;
+  left: 1000px;
   top: 190px;
   z-index: 2;
     
@@ -70,9 +71,49 @@ body.fh5co-offcanvas {
   padding: 10px;
   width: 950px;
   height: 85%;
+  overflow-y: auto;
   
   border-radius: 20px;
 
+}
+.fh5co-listing .container img{
+
+    
+}
+.content-area{
+  position: absolute;
+  background-color: #f9f9f93f;
+  top: 100px;
+  right: 10px;
+  padding: 5px;
+  height: 75%;
+  z-index: 2;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+aside{
+  height: 100%;
+  width: 200px;
+  overflow-y: auto;
+  text-align: right;
+  overflow-y: auto;
+}
+.cam{
+  margin: 10px;
+  
+}
+.input-group{
+  margin-left: 380px;
+  padding: 5px;
+  border-radius: 100px;
+  
+}
+
+.row .cam .btn{
+  padding: 0.7em 2em;
+  position: absolute;
+  z-index: 2;
+  
 }
 
 a {

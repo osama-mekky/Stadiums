@@ -6,10 +6,23 @@ from django.shortcuts import get_object_or_404
 from .forms import *
 from django.utils import timezone
 from django.contrib import messages
+from django.db.models import Q
 
 def pitches(request):
+    q=''
+
+    if request.GET.get('q') != None :
+         q= request.GET.get('q')
+    else :
+         ''     
+    pitche = Pitche.objects.filter(Q(city__name__icontains=q)|Q(Name__icontains = q))
+    pitche_count=pitche.count()
+
     context ={
-        'pitche':Pitche.objects.all(),
+        'pitche':pitche,
+        'citys' :City.objects.all(),
+        'pitche_count':pitche_count,   
+
     }
     return render(request,'pitches/pitches.html',context)
 
