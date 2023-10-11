@@ -8,6 +8,8 @@ from django.utils import timezone
 from django.contrib import messages
 from django.db.models import Q
 
+from django.core.paginator import Paginator
+
 def pitches(request):
     q=''
 
@@ -17,11 +19,18 @@ def pitches(request):
          ''     
     pitche = Pitche.objects.filter(Q(city__name__icontains=q)|Q(Name__icontains = q))
     pitche_count=pitche.count()
+    
+    #paginations
+    pitt = Pitche.objects.all()
+    paginator = Paginator(pitt,8)
+    page = request.GET.get('page')
+    paged_pitches = paginator.get_page(page)
 
     context ={
         'pitche':pitche,
         'citys' :City.objects.all(),
-        'pitche_count':pitche_count,   
+        'pitche_count':pitche_count,
+        'paged_pitches':paged_pitches,   
 
     }
     return render(request,'pitches/pitches.html',context)

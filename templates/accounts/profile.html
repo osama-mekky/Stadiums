@@ -64,7 +64,11 @@
                             <td>{{oph.from_hour|date:'h:i A'}}</td>
                             <td>{{oph.to_hour|date:'h:i A' }}</td>
                             <td>{{oph.timing}}</td>
-                            <td><a  class="btn btn-danger" href="{% url 'delate-booking' oph.id %}">Delate</a></td>
+                            {% if oph.from_hour <= time %}
+                            <td><a  style="width: 120px; cursor:none;pointer-events:none" class="btn btn-warning">Finished</a></td>
+                            {% else %}
+                            <td><a style="width: 120px;"  class="btn btn-danger" href="{% url 'delate-booking' oph.id %}">Delate</a></td>
+                            {% endif %}
                             <td>{{oph.id}}</td>
                           </tr>
                         </tbody>
