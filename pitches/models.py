@@ -14,13 +14,7 @@ class City(models.Model):
     def __str__(self) -> str:
         return self.name
 
-class Manager(models.Model):
-    name = models.CharField(max_length=50)
-    phone = models.CharField(max_length=11)
-    email = models.CharField(max_length=50)
 
-    def __str__(self):
-        return self.name
 
 
 class Pitche(models.Model):
@@ -32,7 +26,7 @@ class Pitche(models.Model):
     location = models.CharField(max_length=500)
     name_of_supervisor = models.CharField(max_length=50)
     phone_of_supervisor = models.CharField(max_length=11)
-    manager = models.ForeignKey(Manager,on_delete=models.DO_NOTHING)
+    manager = models.ForeignKey('Manager',on_delete=models.DO_NOTHING)
     
 
     def __str__(self):
@@ -69,9 +63,10 @@ class OpeningHours(models.Model):
     def clean(self):
         if self.from_hour >= self.to_hour:
             raise ValidationError('Wrong Time')
-        print(timezone.now())
         if self.from_hour <=timezone.now():
             raise ValidationError("This time is Gone")
+        if Manager.objects.filter(user = self.user).exists():
+            raise ValidationError("This Account For Just Manage")
         
 
         # becaues no one can booking the pitche more the range of booking
@@ -99,6 +94,14 @@ class OpeningHours(models.Model):
 
 
 
+class Manager(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    phone = models.CharField(max_length=11)
+    email = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
 
  # if OpeningHours.objects.filter(to_hour = self.to_hour).exists():
         #     raise ValidationError("Wrong")

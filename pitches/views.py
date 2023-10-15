@@ -67,7 +67,27 @@ def delateBooking(request,id):
     #     booking.delete()
      return redirect('profile')
 
+# def check_activate(request):
+#      start = OpeningHours.objects.all()
+#      for i in start :
+#           duration= i.from_hour -datetime.timedelta(hours=6)
+#           active = timezone.now() >= duration
+#           if active :
+#                return render(request,'accounts/profile.html',{'active':active}) 
 
+
+
+
+
+
+
+
+   
+               
+    #  duration = start.from_hour - datetime.timedelta(hours=6)
+    #  active = timezone.now() >= duration
+    #  if active :
+    #       return render(request,'accounts/profile.html',{'active':active}) 
 
 
 

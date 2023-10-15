@@ -5,9 +5,11 @@ import re
 from .models import *
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from pitches.models import OpeningHours
+from pitches.models import OpeningHours ,Manager
 
 from django.utils import timezone
+import datetime 
+
 
 # Create your views here.
 
@@ -94,7 +96,10 @@ def logout(request):
 @login_required(login_url='login')
 def profile(request):
     openingHours = OpeningHours.objects.all()
+    manager = Manager.objects.all()
     time = timezone.now()
+    #limted_time =datetime.timedelta(minutes=2)
+    
     if request.method=='POST' and 'btnsave' in request.POST:
         if request.user is not None and request.user.id != None :
             userprofile = UserProfile.objects.get(user = request.user)
@@ -123,6 +128,9 @@ def profile(request):
                 'pass':request.user.password,
                 'openingHours':openingHours,
                 'time':time,
+                'manager':manager,
+                
+                
 
             }
             return render(request,'accounts/profile.html',context)
