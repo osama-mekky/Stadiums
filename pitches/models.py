@@ -56,7 +56,7 @@ class OpeningHours(models.Model):
 
 
     def __str__(self):
-        return f"{self.pitche}-{self.from_hour.time()} to {self.to_hour.time()}"
+        return f"{self.from_hour.time()}- {self.pitche}-to {self.to_hour.time()}"
     class Meta :
         ordering =['-from_hour']
   
@@ -67,6 +67,7 @@ class OpeningHours(models.Model):
             raise ValidationError("This time is Gone")
         if Manager.objects.filter(user = self.user).exists():
             raise ValidationError("This Account For Just Manage")
+        
         
 
         # becaues no one can booking the pitche more the range of booking

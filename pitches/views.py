@@ -21,13 +21,13 @@ def pitches(request):
     pitche_count=pitche.count()
     
     #paginations
-    pitt = Pitche.objects.all()
-    paginator = Paginator(pitt,8)
+    #pitt = Pitche.objects.all()
+    paginator = Paginator(pitche,12)
     page = request.GET.get('page')
     paged_pitches = paginator.get_page(page)
 
     context ={
-        'pitche':pitche,
+        #'pitche':pitche,
         'citys' :City.objects.all(),
         'pitche_count':pitche_count,
         'paged_pitches':paged_pitches,   

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'hello.apps.HelloConfig',
     'accounts.apps.AccountsConfig',
     'pitches.apps.PitchesConfig',
+    'bootstrap4',
+    'bootstrap_datepicker_plus',
     # 'location_field.apps.DefaultConfig',
 ]
 

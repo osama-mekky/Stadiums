@@ -75,7 +75,7 @@
 
                             
 
-                            {% for pit in pitche %}
+                            {% for pit in paged_pitches %}
                             <div class="col-md-3 col-sm-3 fh5co-item-wrap ">
                                 <a class="fh5co-listing-item" href="{% url 'pitche' pit.id %}" >
                                     <img style="width: 280px;" src="{{pit.photo.url}}" class="img-responsive">
