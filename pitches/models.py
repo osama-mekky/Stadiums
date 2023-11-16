@@ -61,19 +61,31 @@ class OpeningHours(models.Model):
         ordering =['-from_hour']
   
     def clean(self):
-        if self.from_hour >= self.to_hour:
-            raise ValidationError('Wrong Time')
-        if self.from_hour <=timezone.now():
-            raise ValidationError("This time is Gone")
+        # if self.from_hour >= self.to_hour:
+        #     raise ValidationError('Wrong Time')
+        # if self.from_hour <=timezone.now():
+        #     raise ValidationError("This time is Gone")
         if Manager.objects.filter(user = self.user).exists():
             raise ValidationError("This Account For Just Manage")
         
         
 
         # becaues no one can booking the pitche more the range of booking
-        x= self.to_hour -self.from_hour
-        if x >= datetime.timedelta(1) or x > datetime.timedelta(0,00,00,00,00,4):
-            raise ValidationError("Can Not Booking the pitche More than 4 Hours")
+        # x= self.to_hour -self.from_hour
+        # if x >= datetime.timedelta(1) or x > datetime.timedelta(0,00,00,00,00,4):
+        #     raise ValidationError("Can Not Booking the pitche More than 4 Hours")
+        
+        # becaues no one can booking the pitche less than  one hour
+        # if x < datetime.timedelta(0,00,00,00,00,1):
+        #     raise ValidationError("can not booking less than hour")
+
+
+         
+        # minn_from = self.from_hour.minute > 0
+        # minn_to = self.to_hour.minute > 0
+        
+        # if  minn_from or minn_to:
+        #     raise ValidationError("only on o clock")    
 
       
                     

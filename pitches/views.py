@@ -46,10 +46,28 @@ def pitche_page(request,id):
             instance = OpeningHours(pitche_id=id, user=request.user)
             add_date = RestaurantForm(request.POST, request.FILES, instance=instance)
             if add_date.is_valid():
-                add_date.save()
-                messages.success(request, "Booking Successful")
+                # الحجز على رأس الساعة 
+                minn_from = instance.from_hour.minute > 0
+                minn_to = instance.to_hour.minute > 0
+                #########################################
+
+                # الحجز لمدة اقل من ساعة او اكثر من 4 ساعات 
+                x= instance.to_hour -instance.from_hour
+                
+                if instance.from_hour >= instance.to_hour :
+                     messages.error(request,"خطأ في إدخال التوقيت")
+                elif instance.from_hour <=timezone.now():
+                     messages.error(request,"هذا التوقيت قد فات")     
+                elif minn_from or minn_to :
+                     messages.error(request,'لا يمكن الحجز الا من بداية الساعة ')
+                elif x >= datetime.timedelta(1) or x > datetime.timedelta(0,00,00,00,00,4):
+                     messages.error(request,'لا يمكن الحجز اكثر من 4 ساعات ')           
+                else:     
+
+                    add_date.save()
+                    messages.success(request, "تم الحجز بنجاح")
             else:
-                messages.error(request, 'this time is booked before') 
+                messages.error(request, 'هذا التوقيت محجوز مسبقا')
     
     context ={
         'pit':get_object_or_404(Pitche,id=id),
