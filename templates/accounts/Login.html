@@ -10,8 +10,8 @@
 				<div class="row">
 					<div class="col-lg-8 offset-lg-2 text-center">
 						<div class="breadcrumb-text">
-							<p>Fresh adn Organic</p>
-							<h1>Login</h1>
+							<p>الاعضاااء</p>
+							<h1>تسجيل الدخول</h1>
 						</div>
 					</div>
 				</div>
@@ -19,7 +19,7 @@
 		</div>
 		<!-- end breadcrumb section -->
 		<!-- error section -->
-		<div class="contact-from-section mt-150 mb-150">
+		<div dir="rtl" class="contact-from-section mt-150 mb-150">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 mb-5 mb-lg-0">
@@ -36,7 +36,7 @@
 								{% endfor %}
 							  {% endif %}
 							</h2>
-							<h2 style="text-align: center;">Login</h2>
+							<h2 style="text-align: center;">تسجيل الدخول</h2>
 						</div>
 						 <div id="form_status"></div>
 						<div class="contact-form">
@@ -48,8 +48,9 @@
 								</p>
 								
 								<input type="hidden" name="token" value="FsWga4&@f6aw" />
-								<p style="text-align: center;"><input type="submit" value="Login"></p>
-								<h5 style="text-align: center; margin-top: 40px;">Don't Have Account <a href="{% url 'register' %}" style="color: #F28123;">Rigester</a></h5>
+								<p style="text-align: center;"><input type="submit" value="دخول"></p>
+								<h5 style="text-align: center; margin-top: 40px;" ><a  href="{% url 'password-reset' %}">نسيت كلمة االمرور</a></h5>
+								<h5 style="text-align: center; margin-top: 40px;">ليس لديك حساب- <a href="{% url 'register' %}" style="color: #F28123;">انشاء حساب</a></h5>
 							</form>
 						</div>
 					</div>

@@ -2,35 +2,35 @@
 	
     <!-- footer -->
 	<div class="footer-area">
-		<div class="container">
+		<div   class="container">
 			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="footer-box about-widget">
-						<h2 class="widget-title">About us</h2>
-						<p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
+				<div style="text-align: center;" dir="rtl" class="col-lg-4 col-md-6">
+					<div dir="rtl" class="footer-box about-widget">
+						<h2 class="widget-title">عن الموقع</h2>
+						<p style="font-size: 20px;">موقعنا في 90- يحاول ان يجعل تجربتك في حجز الملاعب اسهل واسرع من أي وقت مضى</p>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="footer-box get-in-touch">
-						<h2 class="widget-title">Get in Touch</h2>
-						<ul>
-							<li>34/8, East Hukupara, Gifirtok, Sadan.</li>
-							<li>support@fruitkha.com</li>
-							<li>+00 111 222 3333</li>
+				<div style="text-align: center;" class="col-lg-4 col-md-6">
+					<div  class="footer-box get-in-touch">
+						<h2 class="widget-title">تواصل معانا</h2>
+						<ul style="font-size: 20px;" dir="rtl">
+							<!-- <li>34/8, East Hukupara, Gifirtok, Sadan.</li> -->
+							<li>mal3bk.23@gmail.com</li>
+							<li>01023412334</li>
 						</ul>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6">
+				<div style="text-align: center;" class="col-lg-4 col-md-6">
 					<div class="footer-box pages">
-						<h2 class="widget-title">Pages</h2>
-						<ul>
-							<li><a href="{% url 'index'%}">Home</a></li>
+						<h2 class="widget-title">الصفحات</h2>
+						<ul style="font-size: 20px;">
+							<li><a href="{% url 'index'%}">الصفحة الرئيسية</a></li>
 							{% if request.user.is_authenticated %}
-							<li><a href="{% url 'profile' %}">MyProfile</a></li>
+							<li><a href="{% url 'profile' %}">ملفي الشخصي</a></li>
 							{% endif %}
-							<li><a href="{% url 'pitches' %}">Pitches</a></li>
-							<li><a href="#">About</a></li>
-                            <li><a href="#">Contact</a></li>
+							<li><a href="{% url 'pitches' %}">الملاعب</a></li>
+							<li><a href="#">طريقة الحجز</a></li>
+                            <li><a href="{% url 'contact' %}">تواصل معانا</a></li>
 						</ul>
 					</div>
 				</div>

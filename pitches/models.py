@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib import messages
 from django.utils import timezone
+import datetime
 
 import datetime 
 # Create your models here.
@@ -53,10 +54,17 @@ class OpeningHours(models.Model):
     from_hour = models.DateTimeField(default=datetime.datetime.now())
     to_hour = models.DateTimeField(default=datetime.datetime.now())
     timing = models.CharField(max_length=50,choices=timing)
+    
 
 
     def __str__(self):
-        return f"{self.from_hour.time()}- {self.pitche}-to {self.to_hour.time()}"
+        if self.from_hour.date() == datetime.datetime.today().date():
+            return f"{self.from_hour.time()}- {self.pitche}-to {self.to_hour.time()}--- اليوم"
+        elif self.from_hour <=timezone.now() :
+            return f"{self.from_hour.time()}- {self.pitche}-to {self.to_hour.time()} --- انتهت "
+        else :
+            return f"{self.from_hour.time()}- {self.pitche}-to {self.to_hour.time()} --- {self.from_hour.date()}"
+
     class Meta :
         ordering =['-from_hour']
   
@@ -65,8 +73,34 @@ class OpeningHours(models.Model):
         #     raise ValidationError('Wrong Time')
         # if self.from_hour <=timezone.now():
         #     raise ValidationError("This time is Gone")
+        time = timezone.now()
         if Manager.objects.filter(user = self.user).exists():
             raise ValidationError("This Account For Just Manage")
+        
+       
+        
+       
+         
+         
+         
+       #3
+        # x= OpeningHours.objects.filter(user = self.user).filter(Q(from_hour__time__gte = time)).exists()
+        # if x:
+        #     hours = OpeningHours.objects.all()
+        #     for i in hours :
+        #         if i.user == x :
+        #             raise ValidationError("Have Booking Before")          
+       
+       #2
+    #    for i in hours :
+    #             if i.user == x and i.from_hour >time :
+    #                 raise ValidationError("Have Booking Before")
+        
+       #1 
+        # for i in hours :
+        #         if i.from_hour >= time :
+        #             if i.user == x :
+        #                 raise ValidationError("there is have A booking Before")
         
         
 
@@ -74,19 +108,15 @@ class OpeningHours(models.Model):
         # x= self.to_hour -self.from_hour
         # if x >= datetime.timedelta(1) or x > datetime.timedelta(0,00,00,00,00,4):
         #     raise ValidationError("Can Not Booking the pitche More than 4 Hours")
-        
-        # becaues no one can booking the pitche less than  one hour
+        # # becaues no one can booking the pitche less than  one hour
         # if x < datetime.timedelta(0,00,00,00,00,1):
         #     raise ValidationError("can not booking less than hour")
-
-
-         
+        
         # minn_from = self.from_hour.minute > 0
         # minn_to = self.to_hour.minute > 0
         
         # if  minn_from or minn_to:
-        #     raise ValidationError("only on o clock")    
-
+        #     raise ValidationError("only on o clock")
       
                     
         if (

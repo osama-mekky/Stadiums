@@ -14,8 +14,8 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>Booking Now</p>
-						<h1>Pitches</h1>
+						<p>احجز الأن</p>
+						<h1>الملاعب</h1>
 					</div>
 				</div>
 			</div>
@@ -29,11 +29,11 @@
 
 			<div class="row">
                 <div class="col-md-12">
-                    <div class="product-filters">
+                    <div dir="rtl" class="product-filters">
                         <ul>
-                            <a href="{% url 'pitches' %}"><li class="active" data-filter="*">All</li></a>
+                            <a href="{% url 'pitches' %}"><li class="active" data-filter="*"> الجميع ({{pitche_count}})</li></a>
                             {% for city in citys %}
-							<a href="{% url 'pitches'%}?q={{city.name}}"><li data-filter=".strawberry">{{city.name}}</li></a>
+							<a href="{% url 'pitches'%}?q={{city.name}}"><li data-filter=".strawberry">{{city.name}} ({{city.pitche_set.all.count}})</li></a>
 							{% endfor %}
 						</ul>
                     </div>
@@ -49,7 +49,7 @@
 							
 						</div>
 						<h3>{{pit.Name}}</h3>
-						<a href="{% url 'pitche' pit.id %}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Booking</a>
+						<a href="{% url 'pitche' pit.id %}" class="cart-btn"><i class="fas fa-shopping-cart"></i><strong>حجز</strong> </a>
 						<!-- <p class="product-price"><span>Per Kg</span> 85$ </p> -->
 						
 					</div>
@@ -64,9 +64,9 @@
 						{% if paged_pitches.has_other_pages %}
 						<ul>
 							{% if paged_pitches.has_previous %}
-							<li><a href="?page={{paged_pitches.previous_page_number}}">Prev</a></li>
+							<li><a href="?page={{paged_pitches.previous_page_number}}">السابق</a></li>
 							{% else %}
-							<li class="disabled"><a>Prev</a></li>
+							<li class="disabled"><a>السابق</a></li>
 							{% endif %}
 
 							{% for i in paged_pitches.paginator.page_range %}
@@ -78,9 +78,9 @@
 							{% endfor %}
 
 							{% if paged_pitches.has_next %}
-							<li><a href="?page={{paged_pitches.next_page_number}}">Next</a></li>
+							<li><a href="?page={{paged_pitches.next_page_number}}">التالي</a></li>
 							{% else %}
-							<li class="disabled"><a>Next</a>
+							<li class="disabled"><a>التالي</a>
 							</li>
 							{% endif  %}
 						</ul>

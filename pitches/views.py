@@ -50,22 +50,33 @@ def pitche_page(request,id):
                 minn_from = instance.from_hour.minute > 0
                 minn_to = instance.to_hour.minute > 0
                 #########################################
+                time = timezone.now()
+                hours = OpeningHours.objects.all()
+                x= instance.to_hour -instance.from_hour   
 
                 # الحجز لمدة اقل من ساعة او اكثر من 4 ساعات 
-                x= instance.to_hour -instance.from_hour
                 
                 if instance.from_hour >= instance.to_hour :
-                     messages.error(request,"خطأ في إدخال التوقيت")
+                        messages.error(request,"خطأ في إدخال التوقيت")
                 elif instance.from_hour <=timezone.now():
-                     messages.error(request,"هذا التوقيت قد فات")     
+                        messages.error(request,"هذا التوقيت قد فات")     
                 elif minn_from or minn_to :
-                     messages.error(request,'لا يمكن الحجز الا من بداية الساعة ')
+                        messages.error(request,'لا يمكن الحجز الا من بداية الساعة ')
                 elif x >= datetime.timedelta(1) or x > datetime.timedelta(0,00,00,00,00,4):
-                     messages.error(request,'لا يمكن الحجز اكثر من 4 ساعات ')           
-                else:     
-
-                    add_date.save()
-                    messages.success(request, "تم الحجز بنجاح")
+                        messages.error(request,'لا يمكن الحجز اكثر من 4 ساعات ')
+                
+                else:        
+            
+                    for i in hours :
+                        if i.to_hour >=time :  
+                            if i.user == request.user  :
+                                messages.error(request,"لا يمكنك انشاء حجز جديد ولديك حجز سابق لم ينتهي")
+                                break
+                        else :
+                            add_date.save()
+                            messages.success(request, "تم الحجز بنجاح")
+                            break
+                                   
             else:
                 messages.error(request, 'هذا التوقيت محجوز مسبقا')
     

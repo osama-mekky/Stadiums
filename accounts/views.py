@@ -38,24 +38,27 @@ def Register(request):
                     patt_number = r"\d{11}"
                     patt_age = r"\d{2}"
                     if re.match(patt_age,age):
-                        if re.match(patt_number,phone_number):
+                        if UserProfile.objects.filter(phone_number=phone_number).exists():
+                            messages.error(request,'رقم الموبيل موجود مسبقا')
+                        else:    
+                            if re.match(patt_number,phone_number):
 
-                            if re.match(patt,email):
-                                if re.match(password,conf_password):
-                                    user = User.objects.create_user(first_name = fname,last_name = lName,email=email,username=username,password=password)
-                                    user.save()
-                                    userprofile = UserProfile(user=user,age=age,phone_number=phone_number)
-                                    userprofile.save()
-                                    messages.success(request,'تم انشاء الحساب بنجاح')
-                                    
-                                    
-                                else:
-                                    messages.error(request,"كلمة السر غير متطابقة")
+                                if re.match(patt,email):
+                                    if re.match(password,conf_password):
+                                        user = User.objects.create_user(first_name = fname,last_name = lName,email=email,username=username,password=password)
+                                        user.save()
+                                        userprofile = UserProfile(user=user,age=age,phone_number=phone_number)
+                                        userprofile.save()
+                                        messages.success(request,'تم انشاء الحساب بنجاح')
+                                        
+                                        
+                                    else:
+                                        messages.error(request,"كلمة السر غير متطابقة")
 
+                                else :
+                                    messages.error(request,"خطأ في البريد الألكتروني")
                             else :
-                                messages.error(request,"خطأ في البريد الألكتروني")
-                        else :
-                            messages.error(request,"خطأ في رقم الهاتف")
+                                messages.error(request,"خطأ في رقم الهاتف")
                     else : 
                         messages.error(request,"خطأ في العمر")
 
@@ -99,6 +102,21 @@ def profile(request):
     manager = Manager.objects.all()
     time = timezone.now()
     today = datetime.datetime.today().date()
+    x= datetime.timedelta(1,00,00,00,00,0)
+    w = datetime.timedelta(0,00,00,00,00,4)
+    
+    
+    # for gap in openingHours:
+    #     y = time - gap.from_hour
+    #     if y.days == 0 :
+    #         s = y 
+            
+        
+                
+         
+             
+        
+            
           
 
           
@@ -111,6 +129,14 @@ def profile(request):
                 request.user.last_name = request.POST['lname']
                 userprofile.age = request.POST['age']
                 userprofile.phone_number = request.POST['phone_number']
+                patt_number = r"\d{11}"
+                if re.match(patt_number,userprofile.phone_number):
+                    if UserProfile.objects.filter(phone_number = userprofile.phone_number ).exists():
+                        messages.error(request, "هذا الرقم مستخدم مسبقا")
+                        return redirect("profile")
+                else :
+                    messages.error(request , 'برجاء إدخال الرقم بشكل صحيح')
+                    return redirect("profile")
                 if not request.POST['password'].startswith('pbkdf2_sha256$'):
                     request.user.set_password(request.POST['password'])
                 request.user.save()
@@ -133,6 +159,8 @@ def profile(request):
                 'time':time,
                 'manager':manager,
                 'today':today,
+                # 's':s,
+                # 'x':x,
                 
                 
                 

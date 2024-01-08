@@ -3,10 +3,25 @@
 	/* mekky */
 	.login-icon{
 		position: absolute;
-	    right: 60px;
+	    left: 60px;
 	    top: 20px;
 	    z-index: 999;
 	    color: #fff;
+	}
+	.main-menu ul li:last-child{
+		position: absolute;
+	    left: 0;
+	    top: 0;
+	    z-index: 999;
+	    color: #fff;
+	}
+
+	.contact-form-box h4 i {
+	    left: 80%;
+	}
+
+	.forget_pass {
+		margin-left: 350px;
 	}
 	
 	
@@ -34,7 +49,7 @@
 	    margin-left: 8px;
 	}
 	.contact-form-box h4 i {
-	    left: -20%;
+	    left: 80%;
 	}
 	.comment-template form p input[type=password],.comment-template form p input[type=email] {
 	    margin-left: 8px;
@@ -51,7 +66,7 @@
 	/* mekky */
 	.login-icon{
 		position: absolute;
-	    right: 60px;
+	    left: 60px;
 	    top: 20px;
 	    z-index: 999;
 	    color: #fff;
@@ -135,6 +150,7 @@
 	.site-logo {
 	    text-align: center;
 	    position: absolute;
+		left: 270px;
 	    z-index: 999;
 	}
 	.mean-container .mean-bar {
@@ -198,7 +214,7 @@
 	    width: 100%;
 	}
 	.contact-form-box h4 i {
-	    left: -7%;
+	    left: 60%;
 	}
 	.single-product-content h3 {
 	    font-size: 20px;
@@ -217,7 +233,7 @@
 	}
 	a.mobile-show.search-bar-icon {
 	    position: absolute;
-	    right: 60px;
+	    left:  60px;
 	    top: 22px;
 	    z-index: 999;
 	    color: #fff;
@@ -225,7 +241,7 @@
 	/* mekky */
 	.login-icon{
 		position: absolute;
-	    right: 90px;
+	    left: 90px;
 	    top: 28px;
 	    z-index: 999;
 	    color: #fff;
@@ -240,6 +256,7 @@
 	.site-logo img {
 	    max-width: 150px;
 	}
+
 
 	.responsive-menu-wrap {
 	    top: -35px;
@@ -464,10 +481,14 @@
 	.site-logo {
     position: absolute;
 	    z-index: 99;
+		left: 130px;
 	}
 
 	.mean-container .mean-bar {
 	    z-index: 2;
+		
+		
+		
 	}
 	.section-title {
 	    margin-bottom: 50px;
@@ -531,8 +552,8 @@
 	}
 
 	.contact-form-box h4 i {
-	    left: -20%;
-	}
+		left: 72%;
+		}
 	.featured-text p {
 	    line-height: 1.8;
 	}
@@ -586,7 +607,7 @@
 	}
 	a.mobile-show.search-bar-icon {
 	    position: absolute;
-	    right: 50px;
+	    left: 25px;
 	    top: 22px;
 	    z-index: 999;
 	    color: #fff;
@@ -594,7 +615,7 @@
 	/* mekky */
 	.login-icon{
 		position: absolute;
-	    right: 85px;
+	    left: 60px;
 	    top: 27px;
 	    z-index: 999;
 	    color: #fff;
@@ -615,14 +636,14 @@
 		display: none;
 	}
 	table tr{
-		display: block;;
+		display: block;
 	}
 	table th, table td{
 		padding: .5em;
 	}
 	table td{
 		
-		text-align: right;
+		text-align: left;
 		
 		display: block;
 		font-size: 1em;
@@ -630,9 +651,9 @@
 	}
 	table td::before{
 		content: attr(data-title) '  :   ';
-		float: left;
+		float: right;
 	}
-	table td[data-title="Full_Name"]{
+	table td[data-title="الأسم"]{
 		background-color: rgb(210, 210, 210);
 	}
 	
@@ -659,5 +680,78 @@
 	    display: block;
 	}
 
+	.site-logo {
+		position: absolute;
+			z-index: 99;
+			left: 175px;
+		}
+
 	
 }
+
+@media only screen and (min-width: 360px) and (max-width: 390px) { 
+	.login-icon{
+		position: absolute;
+	    left: 50px;
+	    top: 28px;
+	    z-index: 999;
+	    color: #fff;
+	}
+	a.mobile-show.search-bar-icon {
+	    position: absolute;
+	    left: 15px;
+	    top: 22px;
+	    z-index: 999;
+	    color: #fff;
+	}
+	.site-logo {
+		position: absolute;
+			z-index: 99;
+			left: 110px;
+		}
+}
+
+@media only screen and (min-width: 300px) and (max-width: 360px) { 
+	.login-icon{
+		position: absolute;
+	    left: 35px;
+	    top: 28px;
+	    z-index: 999;
+	    color: #fff;
+	}
+	a.mobile-show.search-bar-icon {
+	    position: absolute;
+	    left: 5px;
+	    top: 22px;
+	    z-index: 999;
+	    color: #fff;
+	}
+	.site-logo {
+		position: absolute;
+			z-index: 99;
+			left: 75px;
+		}
+}
+
+@media only screen and (min-width: 200px) and (max-width: 290px) {
+	.login-icon{
+		position: absolute;
+	    left: 20px;
+	    top: 28px;
+	    z-index: 999;
+	    color: #fff;
+	}
+	a.mobile-show.search-bar-icon {
+	    position: absolute;
+	    left: -10px;
+	    top: 22px;
+	    z-index: 999;
+	    color: #fff;
+	}
+	.site-logo {
+		position: absolute;
+			z-index: 99;
+			left: 40px;
+		}
+
+ }

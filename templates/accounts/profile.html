@@ -8,7 +8,7 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>Profile</p>
+						<p>الصفحة الشخصية</p>
 						<h1>{{fname}} {{lname}}</h1>
 					</div>
 				</div>
@@ -18,7 +18,7 @@
 	<!-- end breadcrumb section -->
 
 	<!-- check out section -->
-	<div class="checkout-section mt-150 mb-150">
+	<div dir="rtl" class="checkout-section mt-150 mb-150">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
@@ -26,28 +26,40 @@
 						<div class="accordion" id="accordionExample">
 						  <div class="card single-accordion">
 						    <div class="card-header" id="headingOne">
+								<h2 style="text-align: center;" >
+									{% if messages %}
+									{% for mess in messages %}
+									
+									{% if 'danger' == mess.tags%}
+									<h4 style="color: red; text-align: center;" >{{mess}}</h4>
+									{% endif %}
+				  
+				  
+									{% endfor %}
+								  {% endif %}
+								</h2>
 						      <h5 class="mb-0">
 						        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-						          Personal Information
+						          المعلومات الشخصية
 						        </button>
 						      </h5>
 						    </div>
 
-						    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+						    <div style="text-align: center;"  id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
 						      <div class="card-body">
 						        <div class="billing-address-form">
 						        	<form method="POST">
 										{% csrf_token %}
 
-						        		<p><input type="text" value="{{fname}}" name="fname" placeholder="First Name"></p>
-										<p><input type="text" value="{{lname}}" name="lname" placeholder="Last Name"></p>
-										<p><input type="text" value="{{age}}" name="age" placeholder="Age"></p>
-										<p><input type="tel"  value="{{phone}}" name="phone_number" placeholder="Phone"></p>
-						        		<p><input type="email" value="{{email}}" name="email" placeholder="Email"></p>
-						        		<p><input type="text" value="{{user}}" name="username" placeholder="Username"></p>
-										<p><input type="password" value="{{pass}}" name="password" placeholder="password"></p>
+						        		<p><input style="text-align: center;" type="text" value="{{fname}}" name="fname" placeholder="First Name"></p>
+										<p><input style="text-align: center;" type="text" value="{{lname}}" name="lname" placeholder="Last Name"></p>
+										<p><input style="text-align: center;" type="text" value="{{age}}" name="age" placeholder="Age"></p>
+										<p><input  style="text-align: center;"type="tel" maxlength="11"  value="{{phone}}" name="phone_number" placeholder="Phone"></p>
+						        		<p><input style="text-align: center;" readonly type="email" value="{{email}}" name="email" placeholder="Email"></p>
+						        		<p><input style="text-align: center;" readonly type="text" value="{{user}}" name="username" placeholder="Username"></p>
+										<p style="font-size: 20px;"><a href="{% url 'change_password' %}">تغير كلمة المرور </a></p>
 						        		
-										<button style="border: none; background: none;" name="btnsave" type="submit"><a class="boxed-btn">Save Changes</a></button>
+										<button style="border: none; background: none;" name="btnsave" type="submit"><a class="boxed-btn">حفظ التغيرات</a></button>
 						        	</form>
 						        </div>
 						      </div>
@@ -94,16 +106,16 @@
 					<div class="order-details-wrap">
 						<table class="order-details">
 							<thead>
-								<tr class="table-head-row">
-									<th>Name</th>
-									<th>Status</th>
-									<th>Day</th>
-									<th>Pitche</th>
+								<tr  class="table-head-row">
+									<th>الأسم</th>
+									<th>الحالة</th>
+									<th>اليوم</th>
+									<th>الملعب</th>
 									
 									
-									<th >From Hour</th>
-									<th >To Hour</th>
-									<th >Timing</th>
+									<th >من</th>
+									<th >إلي</th>
+									<th >المدة</th>
 									
 									
 									
@@ -113,14 +125,16 @@
                         	{% if request.user == oph.user %}
 							<tbody class="order-details-body">
 								<tr>
-									<td data-title="Full_Name">{{oph.user}} {{oph.user.last_name}}</td>
-									{% if oph.from_hour <= time %}
-                            		<td data-title="Stauts"><a  style="width: 120px; cursor:none;pointer-events:none" class="btn btn-warning">Finished</a></td>
+									<td  style="font-size: 20px;" data-title="الأسم">{{oph.user}} {{oph.user.last_name}}</td>
+									{% if oph.to_hour >= time and oph.from_hour <= time %}
+									<td style="font-size: 20px;" data-title="الحالة"><a style="font-size: 20px;" style="width: 120px; cursor:none;pointer-events:none" class="btn btn-success">الأن</a></td>
+									{% elif oph.to_hour <= time %}
+                            		<td style="font-size: 20px;" data-title="الحالة"><a style="font-size: 25px;"  style="width: 120px; cursor:none;pointer-events:none" class="btn btn-warning">منتهية</a></td>
 									{% elif oph.from_hour.date == today %}
-									<td data-title="Stauts"><a  style="width: 120px; cursor:none;pointer-events:none" class="btn btn-primary">Active</a></td>
+									<td style="font-size: 20px;" data-title="الحالة"><a style="font-size: 25px;" style="width: 120px; cursor:none;pointer-events:none" class="btn btn-primary">مؤكدة</a></td>
 
 									{% else %}
-									<td data-title="Stauts"><a style="width: 120px;"  class="btn btn-danger" href="{% url 'delate-booking' oph.id %}" data-toggle="modal" data-target="#staticBackdrop" >Delate </a><br><strong>تنويه لا يمكن الغاء الحجز قبل 24 ساعة من بدايته</strong></td>
+									<td style="font-size: 20px;" data-title="الحالة"><a style="font-size: 25px;"  style="width: 120px;"  class="btn btn-danger" href="{% url 'delate-booking' oph.id %}" data-toggle="modal" data-target="#staticBackdrop" >حذف  </a><br><strong >تنويه لا يمكن الغاء الحجز قبل 24 ساعة من بدايته</strong></td>
 
 									<!-- Modal Delate  -->
 									<div style="width: 400px;" class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -148,28 +162,32 @@
 
 
 									{% endif %}
-									<td data-title="Day">{{oph.from_hour|date}}</td>
-									<td data-title="pitche">{{oph.pitche}}</td>
-									<td data-title="from_hour">{{oph.from_hour|date:'h:i A'}}</td>
-									<td data-title="to_hour">{{oph.to_hour|date:'h:i A' }}</td>
-									<td data-title="timing">{{oph.timing}}</td>
+									<td style="font-size: 20px;" data-title="اليوم">{{oph.from_hour|date}}</td>
+									<td style="font-size: 20px;" data-title="الملعب">{{oph.pitche}}</td>
+									<td style="font-size: 20px;" data-title="من">{{oph.from_hour|date:'h:i A'}}</td>
+									<td style="font-size: 20px;" data-title="إلي">{{oph.to_hour|date:'h:i A' }}</td>
+									<td style="font-size: 20px;" data-title="المدة">{{oph.timing}}</td>
 									
 								</tr>
 								
 								{% elif oph.pitche.manager in manager %}
                              	{% if oph.pitche.manager.user == request.user %}
                               <tr>
-                                <td data-title="Full_Name">{{oph.user.first_name}} {{oph.user.last_name}}</td>
-								{% if oph.from_hour <= time %}
-                                  <td data-title="Stauts"><a  style="width: 120px; cursor:none;pointer-events:none" class="btn btn-warning">Finished</a></td>
+                                <td style="font-size: 20px;" data-title="الأسم">{{oph.user.first_name}} {{oph.user.last_name}}</td>
+								
+								{% if oph.to_hour >= time and oph.from_hour <= time %}
+								<td style="font-size: 20px;" data-title="الحالة"><a style="font-size: 20px;" style="width: 120px; cursor:none;pointer-events:none" class="btn btn-success">الأن</a></td>
+
+								{% elif oph.to_hour <= time %}
+                                  <td style="font-size: 20px;" data-title="الحالة"><a style="font-size: 20px;" style="width: 120px; cursor:none;pointer-events:none" class="btn btn-warning">منتهية</a></td>
                                 {% else %}
-                                  <td data-title="Stauts"><a  style="width: 120px; cursor:none;pointer-events:none" class="btn btn-primary">Active</a></td>
+                                  <td style="font-size: 20px;" data-title="الحالة"><a style="font-size: 20px;" style="width: 120px; cursor:none;pointer-events:none" class="btn btn-primary">مؤكدة</a></td>
                                 {% endif %}
-                                <td data-title="Day">{{oph.from_hour|date}}</td>
-                                <td data-title="pitche">{{oph.pitche}}</td>
-                                <td data-title="from_hour">{{oph.from_hour|date:'h:i A'}}</td>
-                                <td data-title="to_hour">{{oph.to_hour|date:'h:i A' }}</td>
-                                <td data-title="timing">{{oph.timing}}</td>
+                                <td style="font-size: 20px;" data-title="اليوم">{{oph.from_hour|date}}</td>
+                                <td style="font-size: 20px;"  data-title="الملعب">{{oph.pitche}}</td>
+                                <td  style="font-size: 20px;"data-title="من">{{oph.from_hour|date:'h:i A'}}</td>
+                                <td style="font-size: 20px;" data-title="إلي">{{oph.to_hour|date:'h:i A' }}</td>
+                                <td style="font-size: 20px;" data-title="المدة">{{oph.timing}}</td>
                                 
                                 </tr>
 								

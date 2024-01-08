@@ -610,7 +610,7 @@ nav.main-menu > ul li:last-child {
 }
 
 .site-logo {
-  float: left;
+  float: right;
   max-width: 150px;
 }
 
@@ -643,6 +643,7 @@ ul.sub-menu li:last-child {
 
 .mean-container .mean-nav ul li a {
   padding: 0.5em 5%;
+  text-align: center;
 }
 
 .mean-container .mean-nav ul li li a {
@@ -877,7 +878,7 @@ h2.widget-title {
 
 h2.widget-title:after {
   position: absolute;
-  left: 0;
+  right: 150px;
   bottom: 0;
   width: 20px;
   height: 2px;
@@ -983,7 +984,7 @@ h2.widget-title:after {
 
 .footer-box.pages ul li:before {
   position: absolute;
-  left: 0;
+  right: 70px;
   top: 0;
   content: "\f105";
   font-family: "Font Awesome 5 Free";
@@ -2641,10 +2642,10 @@ tr.total-data td strong {
 
 .card.single-accordion .card-header h5 button {
   color: #051922;
-  font-size: 15px;
+  font-size: 20px;
   display: block;
   width: 100%;
-  text-align: left;
+  text-align: center;
   padding: 20px;
   text-decoration: none;
   border: none;
@@ -2680,11 +2681,12 @@ tr.total-data td strong {
 
 .shipping-address-form p, .card-details p {
   margin: 0;
+
 }
 
-.card.single-accordion .card-header h5 button:before {
+/* .card.single-accordion .card-header h5 button:before {
   position: absolute;
-  left: 20px;
+  right: 150px;
   top: 50%;
   content: "\f058";
   font-family: "Font Awesome 5 Free";
@@ -2692,7 +2694,7 @@ tr.total-data td strong {
   line-height: 22px;
   margin-top: -11px;
   color: #F28123;
-}
+} */
 
 .billing-address-form form p:last-child {
   margin-bottom: 0;
